@@ -9,6 +9,9 @@
     Title="Модель нейронной сети"
     Width="900"
     Height="450"
+    
+    MinWidth="530"
+    MinHeight="420"
     mc:Ignorable="d">
     <Grid Margin="8">
         <Grid.RowDefinitions>
@@ -32,6 +35,7 @@
                         PreviewTextInput="NumberValidationTextBox"
                         Text="3"
                         TextChanged="ElementCountTextbox_TextChanged" />
+                    <TextBlock x:Name="ElementCountErrorTextBlock" Visibility="Collapsed" Foreground="Red" Margin="8,0,0,0" VerticalAlignment="Center" />
                 </WrapPanel>
                 <WrapPanel
                     Grid.Column="1"

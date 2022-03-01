@@ -29,13 +29,13 @@ public partial class MainWindow : Window
 
         if (int.TryParse(ElementCountTextbox.Text, out int result))
         {
-            //Чтобы не зависало из-за слишком большой перестройки
-            //Кто-нибудь, пофиксите это, или сделайте хотя бы предупреждение
             if(result > 10 || result < 1)
             {
+                ElementCountErrorTextBlock.Visibility = Visibility.Visible;
+                ElementCountErrorTextBlock.Text = "Количество должно быть от 1 до 10.";
                 return;
             }
-
+            ElementCountErrorTextBlock.Visibility = Visibility.Collapsed;
             VectorInputX.Size = result;
             VectorInputX.Rebuild();
             MatrixInputV.Size = result;

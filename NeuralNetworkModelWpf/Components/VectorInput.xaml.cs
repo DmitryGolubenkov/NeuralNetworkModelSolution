@@ -49,12 +49,14 @@ public partial class VectorInput : UserControl
             }
             else
             {
-                ErrorTextBlock.Text = $"Ошибка обработки данных в ячейке {i}";
+                ErrorTextBlock.Text = $"Ошибка обработки данных в ячейке {i+1}";
                 ErrorTextBlock.Visibility = Visibility.Visible;
                 return;
             }
         }
 
+        ErrorTextBlock.Text = $"";
+        ErrorTextBlock.Visibility = Visibility.Collapsed;
         Value = result;
     }
 

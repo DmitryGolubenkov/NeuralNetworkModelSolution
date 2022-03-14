@@ -8,88 +8,98 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Модель нейронной сети"
     Width="900"
-    Height="450"
-    
+    Height="550"
     MinWidth="530"
     MinHeight="420"
     mc:Ignorable="d">
-    <Grid Margin="8">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Margin="8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-        <GroupBox Header="Управление">
-            <Grid>
+            <GroupBox Header="Управление">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <WrapPanel Grid.Column="0">
+                        <Label>Размерность вектора:</Label>
+                        <TextBox
+                            x:Name="ElementCountTextbox"
+                            Width="96"
+                            PreviewTextInput="NumberValidationTextBox"
+                            Text="3"
+                            TextChanged="ElementCountTextbox_TextChanged" />
+                        <TextBlock
+                            x:Name="ElementCountErrorTextBlock"
+                            Margin="8,0,0,0"
+                            VerticalAlignment="Center"
+                            Foreground="Red"
+                            Visibility="Collapsed" />
+                    </WrapPanel>
+                    <WrapPanel
+                        Grid.Column="1"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top">
+                        <Button
+                            Margin="4"
+                            Padding="4"
+                            Click="ClearEverything_Click">
+                            Очистить всё
+                        </Button>
+                        <Button
+                            Margin="4"
+                            Padding="4"
+                            Click="InsertExampleData_Click">
+                            Ввести данные из примера
+                        </Button>
+                        <Button
+                            Margin="4"
+                            Padding="4"
+                            Click="Solve_Click">
+                            Выполнить расчёт
+                        </Button>
+                    </WrapPanel>
+                </Grid>
+            </GroupBox>
+            <GroupBox Grid.Row="1" Header="Вектор X:">
+                <components:VectorInput x:Name="VectorInputX" Size="3" />
+            </GroupBox>
+            <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <WrapPanel Grid.Column="0">
-                    <Label>Размерность вектора:</Label>
-                    <TextBox
-                        x:Name="ElementCountTextbox"
-                        Width="96"
-                        PreviewTextInput="NumberValidationTextBox"
-                        Text="3"
-                        TextChanged="ElementCountTextbox_TextChanged" />
-                    <TextBlock x:Name="ElementCountErrorTextBlock" Visibility="Collapsed" Foreground="Red" Margin="8,0,0,0" VerticalAlignment="Center" />
-                </WrapPanel>
-                <WrapPanel
-                    Grid.Column="1"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Top">
-                    <Button
-                        Margin="4"
-                        Padding="4"
-                        Click="ClearEverything_Click">
-                        Очистить всё
-                    </Button>
-                    <Button
-                        Margin="4"
-                        Padding="4"
-                        Click="InsertExampleData_Click">
-                        Ввести данные из примера
-                    </Button>
-                    <Button
-                        Margin="4"
-                        Padding="4"
-                        Click="Solve_Click">
-                        Выполнить расчёт
-                    </Button>
-                </WrapPanel>
+
+                <GroupBox Header="Матрицы">
+                    <StackPanel>
+                        <WrapPanel>
+                            <Label>Количество матриц:</Label>
+                            <TextBox
+                                x:Name="MatrixCount_Textbox"
+                                Width="64"
+                                PreviewTextInput="NumberValidationTextBox"
+                                Text="3"
+                                TextChanged="MatrixCountTextbox_TextChanged" />
+                        </WrapPanel>
+                        <StackPanel x:Name="MatrixStackPanel" />
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Grid.Column="1" Header="Результат">
+                    <StackPanel>
+                        <components:NetworkResult
+                            x:Name="NetworkResultDisplay"
+                            ElementCount="3"
+                            MatrixCount="2" />
+                    </StackPanel>
+                </GroupBox>
+
             </Grid>
-        </GroupBox>
-        <GroupBox Grid.Row="1" Header="Вектор X:">
-            <components:VectorInput x:Name="VectorInputX" Size="3" />
-        </GroupBox>
-        <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-
-            <GroupBox Header="Матрица V">
-                <StackPanel>
-                    <components:MatrixInput x:Name="MatrixInputV" Size="3" />
-                </StackPanel>
-
-            </GroupBox>
-
-            <GroupBox Grid.Column="1" Header="Матрица W">
-                <StackPanel>
-                    <components:MatrixInput x:Name="MatrixInputW" Size="3" />
-                </StackPanel>
-            </GroupBox>
-            <GroupBox Grid.Column="2" Header="Результат">
-                <StackPanel>
-                    <components:NetworkResult x:Name="NetworkResultDisplay" Size="3" />
-                </StackPanel>
-            </GroupBox>
-
         </Grid>
-    </Grid>
+    </ScrollViewer>
 </Window>

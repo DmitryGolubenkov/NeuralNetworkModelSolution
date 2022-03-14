@@ -2,77 +2,83 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace NeuralNetworkModelWpf.Components
+namespace NeuralNetworkModelWpf.Components;
+
+/// <summary>
+/// Логика взаимодействия для NetworkResult.xaml
+/// </summary>
+public partial class NetworkResult : UserControl
 {
-    /// <summary>
-    /// Логика взаимодействия для NetworkResult.xaml
-    /// </summary>
-    public partial class NetworkResult : UserControl
+    public int ElementCount { get; set; }
+    public int MatrixCount { get; set; }
+
+    private NeuralNetworkResult _displayedResult;
+    public NeuralNetworkResult DisplayedResult
     {
-        public int Size { get; set; }
-
-        private NeuralNetworkResult _displayedResult;
-        public NeuralNetworkResult DisplayedResult
+        get => _displayedResult;
+        set
         {
-            get => _displayedResult;
-            set
-            {
-                _displayedResult = value;
-                Rebuild();
-            }
+            _displayedResult = value;
+            MatrixCount = value.Net.Count;
+            ElementCount = value.Net[0].Length;
+            Rebuild();
         }
+    }
 
-        private List<TextBlock> _net1TextBoxes = new List<TextBlock>();
-        private List<TextBlock> _net2TextBoxes = new List<TextBlock>();
-        private List<TextBlock> _out1TextBoxes = new List<TextBlock>();
-        private List<TextBlock> _out2TextBoxes = new List<TextBlock>();
-        public void Rebuild()
+    private List<NetworkResultRow> _resultRows = new List<NetworkResultRow>();
+    private List<TextBlock> _resultTextBlocks = new List<TextBlock>();
+
+    public void Rebuild()
+    {
+        _resultRows.Clear();
+        ResultWrapPanel.Children.Clear();
+
+        if (_displayedResult is not null)
         {
-            Net1Display.Children.Clear();
-            Net2Display.Children.Clear();
-            Out1Display.Children.Clear();
-            Out2Display.Children.Clear();
-            _net1TextBoxes.Clear();
-            _net2TextBoxes.Clear();
-            _out1TextBoxes.Clear();
-            _out2TextBoxes.Clear();
-
-            if (_displayedResult is not null)
+            if(_displayedResult.Net.Count != MatrixCount || _displayedResult.Net[0].Length != ElementCount)
             {
-                for (int i = 0; i < Size; i++)
+                return;
+            }
+
+            for (int i = 0; i < MatrixCount; i++)
+            {
+                var net = new NetworkResultRow();
+                var out1 = new NetworkResultRow();
+
+                net.RowNameTextBlock.Text = "NET" + (i+1).ToString();
+                out1.RowNameTextBlock.Text = "OUT" + (i + 1).ToString();
+
+                _resultRows.Add(net);
+                _resultRows.Add(out1);
+                ResultWrapPanel.Children.Add(net);
+                ResultWrapPanel.Children.Add(out1);
+
+                for (int j = 0; j < ElementCount; j++)
                 {
-                    var n1 = new TextBlock() { Text = _displayedResult.Net1[i].ToString(), Margin = new Thickness(6, 0, 6, 0), Width = 48 };
-                    var n2 = new TextBlock() { Text = _displayedResult.Net2[i].ToString(), Margin = new Thickness(6, 0, 6, 0), Width = 48 };
-                    var o1 = new TextBlock() { Text = _displayedResult.Out1[i].ToString(), Margin = new Thickness(6, 0, 6, 0), Width = 48 };
-                    var o2 = new TextBlock() { Text = _displayedResult.Out2[i].ToString(), Margin = new Thickness(6, 0, 6, 0), Width = 48 };
-                    Net1Display.Children.Add(n1);
-                    Out1Display.Children.Add(o1);
-                    Net2Display.Children.Add(n2);
-                    Out2Display.Children.Add(o2);
-                    _net1TextBoxes.Add(n1);
-                    _net2TextBoxes.Add(n2);
-                    _out1TextBoxes.Add(o1);
-                    _out2TextBoxes.Add(o2);
+                    var n = new TextBlock() { Text = _displayedResult.Net[i][j].ToString(), Margin = new Thickness(6, 0, 6, 0), Width = 48 };
+                    var o = new TextBlock() { Text = _displayedResult.Out[i][j].ToString(), Margin = new Thickness(6, 0, 6, 0), Width = 48 };
+
+                    net.RowDisplay.Children.Add(n);
+                    out1.RowDisplay.Children.Add(o);
+                    _resultTextBlocks.Add(n);
+                    _resultTextBlocks.Add(o);
                 }
             }
         }
+    }
 
-        public NetworkResult()
-        {
-            InitializeComponent();
-        }
+    public NetworkResult()
+    {
+        InitializeComponent();
+    }
 
-        internal void Clear()
+    internal void Clear()
+    {
+        if (_displayedResult is not null)
         {
-            if (_displayedResult is not null)
+            foreach(var textbox in _resultTextBlocks)
             {
-                for (int i = 0; i < Size; i++)
-                {
-                    _net1TextBoxes[i].Text = "0";
-                    _net2TextBoxes[i].Text = "0";
-                    _out1TextBoxes[i].Text = "0";
-                    _out2TextBoxes[i].Text = "0";
-                }
+                textbox.Text = "0";
             }
         }
     }

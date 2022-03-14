@@ -108,6 +108,45 @@ public partial class MatrixInput : UserControl
         }
     }
 
+
+    public bool Validate()
+    {
+        if(Value is not null)
+        {
+            int index = 0;
+            for (int y = 0; y < Size; y++)
+            {
+                float[] row = new float[Size];
+                for (int x = 0; x < Size; x++)
+                {
+                    if (float.TryParse(textBoxes[index].Text, out float result))
+                    {
+                        row[x] = result;
+                        index++;
+                    }
+                    else
+                    {
+                        ErrorTextBlock.Text = $"Ошибка обработки данных в ячейке [ряд:{y + 1}; колонка:{x + 1}]";
+                        ErrorTextBlock.Visibility = Visibility.Visible;
+                        return false;
+                    }
+                }
+
+                if (!Validate(row))
+                {
+                    ErrorTextBlock.Text = "Сумма элементов ряда матрицы должна быть равна единице.";
+                    ErrorTextBlock.Visibility = Visibility.Visible;
+                    return false;
+                }
+            }
+
+            ErrorTextBlock.Visibility = Visibility.Collapsed;
+            return true;
+        }
+
+        return false;
+    }
+
     private bool Validate(float[] row)
     {
         float sum = 0;

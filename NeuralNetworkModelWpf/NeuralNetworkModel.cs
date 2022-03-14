@@ -1,34 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace NeuralNetworkModelWpf;
 
 internal static class NeuralNetworkModel
 {
-    internal static NeuralNetworkResult GetResult(float[] vec, float[,] mW, float[,] mV)
-    {
-        if (vec is null || mW is null || mV is null)
-        {
-            return null;
-        }
-
-        NeuralNetworkResult result = new NeuralNetworkResult(vec.Length);
-
-        result.Net1 = Multiply(vec, mW);
-        result.Out1 = F(result.Net1);
-        result.Net2 = Multiply(result.Net2, mV);
-        result.Out2 = F(result.Net2);
-
-        return result;
-    }
-
     private static float[] F(float[] v)
     {
+        var result = new float[v.Length];
         for (int i = 0; i < v.Length; i++)
         {
-            v[i] = (float)(1 / (1 + Math.Exp((double)-v[i])));
+            result[i] = (float)(1 / (1 + Math.Exp((double)-v[i])));
         }
 
-        return v;
+        return result;
     }
 
     private static float[] Multiply(float[] vector, float[,] matrix)
@@ -38,26 +23,29 @@ internal static class NeuralNetworkModel
         {
             for (int j = 0; j < vector.Length; j++)
             {
-                result[i] += vector[i] * matrix[i, j];
+                result[i] += vector[j] * matrix[i, j];
             }
         }
-
         return result;
     }
-
-    //Хз, нужно ли оно вообще
-    private static float[] Multiply(float[] vector, float number)
+    
+    internal static NeuralNetworkResult GetResult(float[] vectorX, List<float[,]> matrixes)
     {
-        float[] result = new float[vector.Length];
-        for (int i = 0; i < vector.Length; i++)
+        if (vectorX is null || matrixes is null || matrixes.Count == 0)
         {
-            for (int j = 0; j < vector.Length; j++)
-            {
-                result[i] += vector[i] * number;
-            }
+            return null;
+        }
+
+        NeuralNetworkResult result = new NeuralNetworkResult();
+
+        float[] vector = vectorX;
+        for (int i = 0; i < matrixes.Count; i++)
+        {
+            result.Net.Add(Multiply(vector, matrixes[i]));
+            result.Out.Add(F(result.Net[i]));
+            vector = result.Out[i];
         }
 
         return result;
     }
-
 }

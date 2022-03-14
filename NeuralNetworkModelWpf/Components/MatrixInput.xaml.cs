@@ -28,12 +28,12 @@ public partial class MatrixInput : UserControl
 
         for (int i = 0; i < Size; i++)
         {
-            //Создаем ряд
+
             RowsGrid.RowDefinitions.Add(new RowDefinition());
             var row = new WrapPanel();
             RowsGrid.Children.Add(row);
             row.SetValue(Grid.RowProperty, i);
-            //Создаем колонки
+
             for (int j = 0; j < Size; j++)
             {
                 var textBox = new TextBox();
@@ -81,13 +81,6 @@ public partial class MatrixInput : UserControl
                     return;
                 }
             }
-
-            if (!Validate(row))
-            {
-                ErrorTextBlock.Text = "Сумма элементов ряда матрицы должна быть равна единице.";
-                ErrorTextBlock.Visibility = Visibility.Visible;
-                return;
-            }
         }
 
         ErrorTextBlock.Visibility = Visibility.Collapsed;
@@ -107,16 +100,6 @@ public partial class MatrixInput : UserControl
                 index++;
             }
         }
-    }
-
-    private bool Validate(float[] row)
-    {
-        float sum = 0;
-        for (int i = 0; i < row.Length; i++)
-        {
-            sum += row[i];
-        }
-        return sum == 1;
     }
 
     private void Clear_Click(object sender, RoutedEventArgs e)

@@ -55,6 +55,7 @@ public partial class VectorInput : UserControl
             }
         }
 
+        ErrorTextBlock.Visibility = Visibility.Collapsed;
         Value = result;
     }
 

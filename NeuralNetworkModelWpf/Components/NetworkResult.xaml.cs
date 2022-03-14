@@ -52,7 +52,7 @@ namespace NeuralNetworkModelWpf.Components
                     _net1TextBoxes.Add(n1);
                     _net2TextBoxes.Add(n2);
                     _out1TextBoxes.Add(o1);
-                    _out2TextBoxes.Add(o1);
+                    _out2TextBoxes.Add(o2);
                 }
             }
         }
@@ -69,10 +69,9 @@ namespace NeuralNetworkModelWpf.Components
                 for (int i = 0; i < Size; i++)
                 {
                     _net1TextBoxes[i].Text = "0";
-                    _net1TextBoxes[i].Text = "0";
-                    _net1TextBoxes[i].Text = "0";
-                    _net1TextBoxes[i].Text = "0";
-
+                    _net2TextBoxes[i].Text = "0";
+                    _out1TextBoxes[i].Text = "0";
+                    _out2TextBoxes[i].Text = "0";
                 }
             }
         }

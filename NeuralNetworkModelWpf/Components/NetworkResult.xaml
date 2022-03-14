@@ -15,40 +15,34 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+
         </Grid.RowDefinitions>
         <WrapPanel
             Grid.Row="0"
             Margin="8"
             VerticalAlignment="Center">
-            <TextBlock>NET1</TextBlock>
+            <TextBlock>NET1:</TextBlock>
             <WrapPanel x:Name="Net1Display" Orientation="Horizontal" />
         </WrapPanel>
-        <Separator Grid.Row="1" />
+        <WrapPanel
+            Grid.Row="1"
+            Margin="8"
+            VerticalAlignment="Center">
+            <TextBlock>OUT1:</TextBlock>
+            <WrapPanel x:Name="Out1Display" Orientation="Horizontal" />
+        </WrapPanel>
         <WrapPanel
             Grid.Row="2"
             Margin="8"
             VerticalAlignment="Center">
-            <TextBlock>OUT1</TextBlock>
-            <WrapPanel x:Name="Out1Display" Orientation="Horizontal" />
-        </WrapPanel>
-        <Separator Grid.Row="3" />
-        <WrapPanel
-            Grid.Row="4"
-            Margin="8"
-            VerticalAlignment="Center">
-            <TextBlock>NET2</TextBlock>
+            <TextBlock>NET2:</TextBlock>
             <WrapPanel x:Name="Net2Display" Orientation="Horizontal" />
         </WrapPanel>
-        <Separator Grid.Row="5" />
         <WrapPanel
-            Grid.Row="6"
+            Grid.Row="3"
             Margin="8"
             VerticalAlignment="Center">
-            <TextBlock>OUT2</TextBlock>
+            <TextBlock>OUT2:</TextBlock>
             <WrapPanel x:Name="Out2Display" Orientation="Horizontal" />
         </WrapPanel>
     </Grid>

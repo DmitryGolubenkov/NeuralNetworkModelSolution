@@ -5,10 +5,6 @@ using System.Windows.Input;
 
 
 namespace NeuralNetworkModelWpf;
-
-/// <summary>
-/// Interaction logic for MainWindow.xaml
-/// </summary>
 public partial class MainWindow : Window
 {
     public MainWindow()
@@ -29,8 +25,6 @@ public partial class MainWindow : Window
 
         if (int.TryParse(ElementCountTextbox.Text, out int result))
         {
-            //Чтобы не зависало из-за слишком большой перестройки
-            //Кто-нибудь, пофиксите это, или сделайте хотя бы предупреждение
             if(result > 10 || result < 1)
             {
                 return;

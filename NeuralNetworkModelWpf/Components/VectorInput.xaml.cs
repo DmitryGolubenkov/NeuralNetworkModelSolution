@@ -28,9 +28,9 @@ public partial class VectorInput : UserControl
         {
             var textBox = new TextBox();
             textBox.Text = "0";
-            textBox.Width = 48;
-            textBox.Height = 22;
-
+            textBox.Width = 44;
+            textBox.Height = 24;
+            textBox.Margin = new Thickness(4);
             textBox.TextChanged += UpdateValue;
             WP.Children.Add(textBox);
             textBoxes.Add(textBox);

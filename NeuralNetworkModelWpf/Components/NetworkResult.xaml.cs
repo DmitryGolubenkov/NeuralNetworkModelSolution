@@ -26,7 +26,7 @@ public partial class NetworkResult : UserControl
     }
 
     private List<NetworkResultRow> _resultRows = new List<NetworkResultRow>();
-    private List<TextBlock> _resultTextBlocks = new List<TextBlock>();
+    private List<TextBox> _resultTextBlocks = new List<TextBox>();
 
     public void Rebuild()
     {
@@ -45,8 +45,8 @@ public partial class NetworkResult : UserControl
                 var net = new NetworkResultRow();
                 var out1 = new NetworkResultRow();
 
-                net.RowNameTextBlock.Text = "NET" + (i+1).ToString();
-                out1.RowNameTextBlock.Text = "OUT" + (i + 1).ToString();
+                net.RowNameTextBlock.Text = "Net " + (i + 1).ToString();
+                out1.RowNameTextBlock.Text = "Out " + (i + 1).ToString();
 
                 _resultRows.Add(net);
                 _resultRows.Add(out1);
@@ -55,8 +55,8 @@ public partial class NetworkResult : UserControl
 
                 for (int j = 0; j < ElementCount; j++)
                 {
-                    var n = new TextBlock() { Text = _displayedResult.Net[i][j].ToString(), Margin = new Thickness(6, 0, 6, 0), Width = 48 };
-                    var o = new TextBlock() { Text = _displayedResult.Out[i][j].ToString(), Margin = new Thickness(6, 0, 6, 0), Width = 48 };
+                    var n = new TextBox() { Text = _displayedResult.Net[i][j].ToString(), Margin = new Thickness(6, 0, 6, 0), Width = 80, Height=28, IsReadOnly = true };
+                    var o = new TextBox() { Text = _displayedResult.Out[i][j].ToString(), Margin = new Thickness(6, 0, 6, 0), Width = 80, Height = 28, IsReadOnly = true };
 
                     net.RowDisplay.Children.Add(n);
                     out1.RowDisplay.Children.Add(o);

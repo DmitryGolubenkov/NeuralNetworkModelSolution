@@ -38,8 +38,9 @@ public partial class MatrixInput : UserControl
             {
                 var textBox = new TextBox();
                 textBox.Text = "0";
-                textBox.MinWidth = 48;
-                textBox.Height = 22;
+                textBox.MinWidth = 50;
+                textBox.Height = 28;
+                textBox.Margin = new Thickness(3);
                 if (ReadOnly)
                 {
                     textBox.IsReadOnly = true;

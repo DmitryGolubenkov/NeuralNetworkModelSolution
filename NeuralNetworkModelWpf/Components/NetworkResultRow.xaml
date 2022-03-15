@@ -10,18 +10,11 @@
     d:DesignWidth="800"
     mc:Ignorable="d">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <WrapPanel Margin="8" VerticalAlignment="Center">
-            <TextBlock
-                x:Name="RowNameTextBlock"
-                Margin="0,0,32,0"
-                d:Text="NET1" />
-            <WrapPanel x:Name="RowDisplay" Orientation="Horizontal" />
-        </WrapPanel>
-        <Separator Grid.Row="1" />
-    </Grid>
+    <WrapPanel Margin="8" VerticalAlignment="Center">
+        <TextBlock
+            x:Name="RowNameTextBlock"
+            Margin="0,12,36,12"
+            d:Text="NET1" />
+        <WrapPanel x:Name="RowDisplay" Orientation="Horizontal" />
+    </WrapPanel>
 </UserControl>

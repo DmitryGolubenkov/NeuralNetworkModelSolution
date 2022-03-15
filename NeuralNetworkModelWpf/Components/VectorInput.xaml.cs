@@ -30,7 +30,7 @@ public partial class VectorInput : UserControl
             textBox.Text = "0";
             textBox.Width = 48;
             textBox.Height = 22;
-
+            textBox.Margin = new Thickness(3);
             textBox.TextChanged += UpdateValue;
             WP.Children.Add(textBox);
             textBoxes.Add(textBox);
